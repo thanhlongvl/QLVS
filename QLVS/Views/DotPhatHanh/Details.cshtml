@@ -1,0 +1,82 @@
+﻿@model QLVS.Models.DotPhatHanh
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+<br />
+<div>
+    <h4>Đợt phát hành</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DaiLy.TenDaiLy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaiLy.TenDaiLy)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiVeso.MaLoaiVeSo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiVeso.MaLoaiVeSo)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiVeso.Tinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiVeso.Tinh)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayNhan)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SLBanDuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SLBanDuoc)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TienThanhToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TienThanhToan)
+        </dd>
+        <br />
+
+    </dl>
+</div>
+<p>
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit",  new { id = Model.MaDaiLy })';return false;"><b> Sửa</b></button>&nbsp&nbsp&nbsp&nbsp
+    <button class="btn btn-default" onclick="location.href='@Url.Action("Index")';return false;"><b>Trở lại</b></button>&nbsp&nbsp&nbsp&nbsp
+</p>

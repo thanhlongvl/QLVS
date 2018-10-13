@@ -1,0 +1,61 @@
+﻿@model QLVS.Models.SoLuongDK
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa thông tin</h2>
+<br />
+<h3>Bạn chắc rằng muốn xóa thông tin về số lượng đăng kí của đại lý?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaiLy.TenDaiLy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaiLy.TenDaiLy)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDK)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongDK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongDK1)
+        </dd>
+        <br />
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> &nbsp&nbsp&nbsp&nbsp
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Index")';return false;"><b>Trở lại</b></button>&nbsp&nbsp&nbsp&nbsp
+        </div>
+    }
+</div>

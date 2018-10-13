@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title - Quản lý vé số</title>
@@ -8,52 +10,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
-    @Styles.Render("~/assets/css/bootstrap.min.css")
-    @Styles.Render("~/assets/css/normalize.css")
-    @Styles.Render("~/assets/css/font-awesome.min.css")
-    @Styles.Render("~/assets/css/themify-icons.css")
-    @Styles.Render("~/assets/css/flag-icon.min.css")
-    @Styles.Render("~/assets/css/cs-skin-elastic.css")
-    @Styles.Render("~/assets/scss/style.css")
-    @Styles.Render("~/assets/css/lib/vector-map/jqvmap.min.css")
-    
-    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/normalize.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/flag-icon.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/cs-skin-elastic.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/scss/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/scss/style.scss" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- <link rel="stylesheet" href="assets1/css/bootstrap-select.less"> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel" style="width: 240px; height: 50px ">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div class="navbar-header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
                 <br />
-                <img src="../../Image/logo_mc.png" alt="Alternate Text" class="img-responsive img-thumbnail" style="width:300px; height:100px;" />
-                
+                <img src="../../Image/logo_mc.png" alt="Alternate Text" class="img-responsive img-thumbnail" style="width:200px; height:100px;" />
+
                 <a class="navbar-brand hidden" href="./"><img src="Image/Logo.jpg" alt="Logo"></a>
             </div>
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <h3 class="menu-title">Quản lí chung</h3><!-- /.menu-title -->
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Loại vé số</a>
+                        @Html.ActionLink("Loại vé số", "Index", "LoaiVeSo")
                     </li>
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Đại lý</a>
+                        @Html.ActionLink("Đại Lý", "Index", "DaiLy")
                     </li>
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-line-chart"></i>Giải trúng</a>
+                        @Html.ActionLink("Số lượng đăng kí", "Index", "SoLuongDKs")
                     </li>
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-map-o"></i>Phiếu thu</a>
-                    </li>
-                    <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-street-view"></i>Phiếu chi</a>
+                        @Html.ActionLink("Đợt phát hành", "Index", "DotPhatHanh")
                     </li>
                     <h3 class="menu-title">Tác vụ</h3><!-- /.menu-title -->
-                    <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-paper-plane"></i>Số lượng đăng ký</a>
-                    </li>
+                  
                     <li>
                         <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-fort-awesome"></i>Phát hành</a>
                     </li>
@@ -69,28 +68,34 @@
     </aside><!-- /#left-panel -->
     <!-- Left Panel -->
     <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
+    <div id="right-panel" class="right-panel" style="background: white; padding-left: 100px">
         <!-- Header-->
         <header id="header" class="header">
             <div class="header-menu">
-                <h3 class="text-center">PHẦN MỀM QUẢN LÝ VÉ SỐ</h3>
+                <h3 class="text-center">  <b>PHẦN MỀM QUẢN LÝ VÉ SỐ </b></h3>
             </div>
+            @RenderBody()
         </header><!-- /header -->
         <!-- Header-->
-        @RenderBody()
+
+        @RenderSection("scripts", required: false)
 
     </div>
-    @Scripts.Render("~/assets/js/vendor/jquery-2.1.4.min.js")
-    @Scripts.Render("~/assets/js/plugins.js")
-    @Scripts.Render("~/assets/js/main.js")
-    @Scripts.Render("~/assets/js/lib/chart-js/Chart.bundle.js")
-    @Scripts.Render("~/assets/js/dashboard.js")
-    @Scripts.Render("~/assets/js/widgets.js")
-    @Scripts.Render("~/assets/js/lib/vector-map/jquery.vmap.js")
-    @Scripts.Render("~/assets/js/lib/vector-map/jquery.vmap.min.js")
-    @Scripts.Render("~/assets/js/lib/vector-map/jquery.vmap.sampledata.js")
-    @Scripts.Render("~/assets/js/lib/vector-map/country/jquery.vmap.world.js")
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+
+    @section scripts {
+
+        <script src=" ~/assets/js/vendor/jquery-2.1.4.min.js"></script>
+        <script src="~/assets/js/plugins.js"></script>
+        <script src="~/assets/js/main.js"></script>
+        <script src="~/assets/js/lib/chart-js/Chart.bundle.js"></script>
+        <script src="~/assets/js/dashboard.js"></script>
+        <script src="~/assets/js/widgets.js"></script>
+        <script src="~/assets/js/lib/vector-map/jquery.vmap.js"></script>
+        <script src="~/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
+        <script src="~/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
+        <script src="~/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    }
 </body>
 </html>

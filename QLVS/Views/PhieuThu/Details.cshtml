@@ -1,0 +1,51 @@
+﻿@model QLVS.Models.PhieuThu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PhieuThu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DaiLy.TenDaiLy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaiLy.TenDaiLy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayNop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTienNop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoTienNop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flag)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaPhieuThu }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,88 @@
+﻿@model QLVS.Models.DotPhatHanh
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa thông tin</h2>
+
+<h3>Bạn chắc rằng muốn xóa thông tin đợt phát hành?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DaiLy.TenDaiLy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaiLy.TenDaiLy)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiVeso.MaLoaiVeSo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiVeso.MaLoaiVeSo)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiVeso.Tinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiVeso.Tinh)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayNhan)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SLBanDuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SLBanDuoc)
+        </dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TienThanhToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TienThanhToan)
+        </dd>
+        <br />
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> &nbsp&nbsp&nbsp&nbsp
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Index")';return false;"><b>Trở lại</b></button>&nbsp&nbsp&nbsp&nbsp
+        </div>
+    }
+</div>
