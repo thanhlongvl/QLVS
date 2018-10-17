@@ -1,4 +1,4 @@
-namespace QLVS.Models
+﻿namespace QLVS.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,9 +19,11 @@ namespace QLVS.Models
         public string MaGiai { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày xổ")]
         public DateTime? NgaySo { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Số trúng")]
         public string SoTrung { get; set; }
 
         public bool? Flag { get; set; }

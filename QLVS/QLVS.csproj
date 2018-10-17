@@ -159,7 +159,9 @@
     <Compile Include="Controllers\CongNoController.cs" />
     <Compile Include="Controllers\DaiLyController.cs" />
     <Compile Include="Controllers\DotPhatHanhController.cs" />
+    <Compile Include="Controllers\GiaiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KetQuaSoXoController.cs" />
     <Compile Include="Controllers\LoaiVesoController.cs" />
     <Compile Include="Controllers\PhieuThuController.cs" />
     <Compile Include="Controllers\SoLuongDKsController.cs" />
@@ -365,6 +367,16 @@
     <Content Include="Views\SoLuongDKs\Edit.cshtml" />
     <Content Include="Views\SoLuongDKs\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplate\Template.cshtml" />
+    <Content Include="Views\Giai\Create.cshtml" />
+    <Content Include="Views\Giai\Delete.cshtml" />
+    <Content Include="Views\Giai\Details.cshtml" />
+    <Content Include="Views\Giai\Edit.cshtml" />
+    <Content Include="Views\Giai\Index.cshtml" />
+    <Content Include="Views\KetQuaSoXo\Create.cshtml" />
+    <Content Include="Views\KetQuaSoXo\Delete.cshtml" />
+    <Content Include="Views\KetQuaSoXo\Details.cshtml" />
+    <Content Include="Views\KetQuaSoXo\Edit.cshtml" />
+    <Content Include="Views\KetQuaSoXo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

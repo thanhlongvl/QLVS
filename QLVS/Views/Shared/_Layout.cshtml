@@ -1,13 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title - Quản lý vé số</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @RenderSection("Plugin1", false)
+
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -20,6 +21,7 @@
     <link href="~/assets/scss/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/assets/scss/style.scss" rel="stylesheet" type="text/css" media="all" />
     <link href="~/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/assets/css/lib/datatable/dataTables.bootstrap.min.css">
 
     <!-- <link rel="stylesheet" href="assets1/css/bootstrap-select.less"> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -40,27 +42,30 @@
                 <ul class="nav navbar-nav">
                     <h3 class="menu-title">Quản lí chung</h3><!-- /.menu-title -->
                     <li>
-                        @Html.ActionLink("Loại vé số", "Index", "LoaiVeSo")
+                        <a href="@Url.Action("Index","LoaiVeso")"> <i class="menu-icon fa fa-laptop"></i>Loại vé số</a>
                     </li>
                     <li>
-                        @Html.ActionLink("Đại Lý", "Index", "DaiLy")
+                        <a href="@Url.Action("Index","DaiLy")"> <i class="menu-icon fa fa-table"></i>Đại Lý</a>
                     </li>
                     <li>
-                        @Html.ActionLink("Số lượng đăng kí", "Index", "SoLuongDKs")
+                        <a href="@Url.Action("Index","Giai")"> <i class="menu-icon fa fa-line-chart"></i>Giải trúng</a>
                     </li>
                     <li>
-                        @Html.ActionLink("Đợt phát hành", "Index", "DotPhatHanh")
+                        <a href="@Url.Action("Index","PhieuThu")"> <i class="menu-icon fa fa-street-view"></i>Phiếu thu</a>
                     </li>
                     <h3 class="menu-title">Tác vụ</h3><!-- /.menu-title -->
                   
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-fort-awesome"></i>Phát hành</a>
+                        <a href="@Url.Action("Index","SoLuongDKs")"> <i class="menu-icon fa fa-paper-plane"></i>Đăng ký SL</a>
                     </li>
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Kết quả xổ số</a>
+                        <a href="@Url.Action("Index","DotPhatHanh")"> <i class="menu-icon fa fa-fort-awesome"></i>Phát hành</a>
                     </li>
                     <li>
-                        <a href="#" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Dò số</a>
+                        <a href="@Url.Action("Index","KetQuaSoXo")"> <i class="menu-icon fa fa-glass"></i>Kết quả xổ số</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","LoaiVeSo")"> <i class="menu-icon fa fa-th"></i>Dò số</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -68,23 +73,71 @@
     </aside><!-- /#left-panel -->
     <!-- Left Panel -->
     <!-- Right Panel -->
-    <div id="right-panel" class="right-panel" style="background: white; padding-left: 100px">
+    <div id="right-panel" class="right-panel">
         <!-- Header-->
         <header id="header" class="header">
             <div class="header-menu">
-                <h3 class="text-center">  <b>PHẦN MỀM QUẢN LÝ VÉ SỐ </b></h3>
+                <div class="col-sm-7">
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="dropdown for-notification">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell"></i>
+                                <span class="count bg-danger">5</span>
+                            </button>
+                        </div>
+                        <div class="dropdown for-message">
+                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    id="message"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ti-email"></i>
+                                <span class="count bg-primary">9</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="../../images/admin.jpg" alt="User Avatar">
+                        </a>
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+                    <div class="language-select dropdown" id="language-select">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true" aria-expanded="true">
+                            <i class="flag-icon flag-icon-us"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="language">
+                            <div class="dropdown-item">
+                                <span class="flag-icon flag-icon-fr"></span>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-es"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-us"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-it"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            @RenderBody()
         </header><!-- /header -->
         <!-- Header-->
+        <div class="content mt-3">
+            @RenderBody()
+        </div>
+      </div>
 
-        @RenderSection("scripts", required: false)
-
-    </div>
-
-    @section scripts {
-
-        <script src=" ~/assets/js/vendor/jquery-2.1.4.min.js"></script>
+        <script src="~/assets/js/vendor/jquery-2.1.4.min.js"></script>
+        <script src="~/assets/js/popper.min.js"></script>
         <script src="~/assets/js/plugins.js"></script>
         <script src="~/assets/js/main.js"></script>
         <script src="~/assets/js/lib/chart-js/Chart.bundle.js"></script>
@@ -94,8 +147,7 @@
         <script src="~/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
         <script src="~/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
         <script src="~/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    }
+        @RenderSection("Plugin2", false)
 </body>
 </html>

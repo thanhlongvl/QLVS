@@ -1,0 +1,101 @@
+﻿@model IEnumerable<QLVS.Models.Giai>
+
+@{
+    ViewBag.Title = "Giai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giải trúng</h2>
+<br />
+
+@if (TempData["notice"] != null)
+{
+    if (TempData["notice"].ToString() == "Successfully create")
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>Thông báo! </strong>Thêm thông tin Giải: <b>@TempData["tendaily"]</b> thành công
+        </div>
+    }
+    else
+    if (TempData["notice"].ToString() == "Successfully edit")
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>Thông báo! </strong>Sửa thông tin Giải: Mã số <b> @TempData["madaily"], tên @TempData["tendaily"] </b> thành công
+        </div>
+    }
+    else
+    if (TempData["notice"].ToString() == "Successfully delete")
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>Thông báo! </strong>Xóa thông tin Giải: Mã số  <b> @TempData["madaily"], tên @TempData["tendaily"] </b> thành công
+        </div>
+    }
+}
+<p>
+    <button class="btn btn-info" onclick="location.href='@Url.Action("Create")';return false;">Tạo mới</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning" onclick="location.href='@Url.Action("Index")';return false;">Tải lại</button>
+</p>
+<br />
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Giải trúng</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.TenGiai)</th>
+                                    <th>@Html.DisplayNameFor(model => model.SoTienNhan)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Flag)</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.TenGiai)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SoTienNhan)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Flag)</td>
+                                        <td align="center">
+                                            <button class="btn btn-success" onclick="location.href='@Url.Action("Details",  new { id = item.MaGiai })';return false;">Xem</button>&nbsp&nbsp&nbsp&nbsp
+                                            <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit",  new { id = item.MaGiai})';return false;">Sửa</button>&nbsp&nbsp&nbsp&nbsp
+                                            <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete",  new { id = item.MaGiai })';return false;">Xóa</button>&nbsp&nbsp&nbsp&nbsp
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+@section Plugin1{
+    <link rel="stylesheet" href="~/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+}
+@section Plugin2{
+    <script src="~/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="~/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/assets/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/assets/js/lib/data-table/datatables-init.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
+}
