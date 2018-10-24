@@ -1,5 +1,4 @@
-﻿@model PagedList.IPagedList<QLVS.Models.SoLuongDK>
-@using PagedList.Mvc;
+﻿@model IEnumerable<QLVS.Models.SoLuongDK>
 
 @{
     ViewBag.Title = "Số lượng đăng kí";
@@ -9,15 +8,6 @@
 <h2><b>Quản lí số lượng đăng kí</b></h2>
 
 <br />
-
-@using (Html.BeginForm("Index", "SoLuongDKs", FormMethod.Get))
-{
-    <p>
-        Nhập mã đại lí: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </p>
-    <br />
-}
 
 
 @if (TempData["notice"] != null)
@@ -42,18 +32,6 @@
             <strong>Thông báo! </strong>Xóa thông tin SL đăng kí vé số với mã: <b>@TempData["masl"] của @TempData["daily"] </b> thành công
         </div>
     }
-    else if (TempData["notice"].ToString() == "Have result")
-    {
-        <div class="alert alert-info" role="alert">
-            <strong>Tìm kiếm thành công! </strong>Có @TempData["dem"] kết quả trả về!
-        </div>
-    }
-    else if (TempData["notice"].ToString() == "No result")
-    {
-        <div class="alert alert-danger" role="alert">
-            <strong> Không có kết quả trả về!</strong>
-        </div>
-    }
 }
 
 <p>
@@ -61,63 +39,68 @@
     <button class="btn btn-warning" onclick="location.href='@Url.Action("Index")';return false;">Tải lại</button>
 </p>
 <br />
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Loại vé số</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.ID)</th>
+                                    <th>@Html.DisplayNameFor(model => model.DaiLy.TenDaiLy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.NgayDK)</th>
+                                    <th>@Html.DisplayNameFor(model => model.SoLuongDK1)</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DaiLy.TenDaiLy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.NgayDK)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SoLuongDK1)</td>
+                                        <td align="center">
+                                            <button class="btn btn-success" onclick="location.href='@Url.Action("Details",  new { id = item.ID })';return false;">Xem</button>&nbsp&nbsp&nbsp&nbsp
+                                            <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit",  new { id = item.ID})';return false;">Sửa</button>&nbsp&nbsp&nbsp&nbsp
+                                            <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete",  new { id = item.ID })';return false;">Xóa</button>&nbsp&nbsp&nbsp&nbsp
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+@section Plugin1{
+    <link rel="stylesheet" href="~/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+}
+@section Plugin2{
+    <script src="~/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="~/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/assets/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/assets/js/lib/data-table/datatables-init.js"></script>
 
-<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-    <tr>
-        <th>
-            @Html.ActionLink("Mã số", "Index", new { sortOrder = ViewBag.IDSortParm })
-        </th>
 
-        <th>
-            @Html.ActionLink("Tên đại lí", "Index", new { sortOrder = ViewBag.TenDaiLySortParm })
-        </th>
-
-        <th>
-            @Html.ActionLink("Ngày đăng kí", "Index", new { sortOrder = ViewBag.NgayDKSortParm })
-        </th>
-
-        <th>
-            @Html.ActionLink("Số lượng đăng kí", "Index", new { sortOrder = ViewBag.SldkSortParm })
-        </th>
-
-        <th style="text-align: center">Chức năng</th>
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DaiLy.TenDaiLy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayDK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuongDK1)
-            </td>
-
-            <td align="center">
-                <button class="btn btn-success" onclick="location.href='@Url.Action("Details",  new { id = item.ID })';return false;">Xem</button>&nbsp&nbsp&nbsp&nbsp
-                <button class="btn btn-primary" onclick="location.href='@Url.Action("Edit",  new { id = item.ID})';return false;">Sửa</button>&nbsp&nbsp&nbsp&nbsp
-                <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete",  new { id = item.ID })';return false;">Xóa</button>&nbsp&nbsp&nbsp&nbsp
-            </td>
-        </tr>
-    }
-
-</table>
-
-Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của
-@Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Index",
-new
-{
-    page,
-    sortOrder = ViewBag.CurrentSort,
-    currentFilter =
-ViewBag.CurrentFilter
-}))
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
+}

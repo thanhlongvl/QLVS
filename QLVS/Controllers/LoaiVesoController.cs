@@ -17,19 +17,12 @@ namespace QLVS.Controllers
         private QLVSContext db = new QLVSContext();
 
         // GET: LoaiVeso
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string searchString)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaLoaiVeSoSortParm = sortOrder == "maLVS" ? "maLVS_desc" : "maLVS";
-            ViewBag.TinhSortParm = sortOrder == "tinh" ? "tinh_desc" : "tinh";
             var LVS = from s in db.LoaiVesoes where s.Flag == true select s;
             LVS = LVS.OrderByDescending(s => s.MaLoaiVeSo);
 
-            if (searchString != null)
-                page = 1;
-            else searchString = currentFilter;
-            ViewBag.CurrentFilter = searchString;
-
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 LVS = LVS.Where(s => s.Tinh.ToUpper().Contains(searchString.ToUpper()) || s.MaLoaiVeSo.ToUpper().Contains(searchString.ToUpper()));
@@ -43,26 +36,9 @@ namespace QLVS.Controllers
                     TempData["notice"] = "No result";
                 }
             }
-            switch (sortOrder)
-            {
-                case "maLVS":
-                    LVS = LVS.OrderBy(s => s.MaLoaiVeSo);
-                    break;
-                case "maLVS_desc":
-                    LVS = LVS.OrderByDescending(s => s.MaLoaiVeSo);
-                    break;
-                case "tinh":
-                    LVS = LVS.OrderBy(s => s.Tinh);
-                    break;
-                case "tendaily_desc":
-                    LVS = LVS.OrderByDescending(s => s.Tinh);
-                    break;
 
-            }
 
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(LVS.ToPagedList(pageNumber, pageSize));
+            return View(db.LoaiVesoes.ToList());
         }
 
 

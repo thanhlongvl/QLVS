@@ -16,19 +16,11 @@ namespace QLVS.Controllers
         private QLVSContext db = new QLVSContext();
 
         // GET: DaiLy
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string searchString)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaDaiLySortParm = sortOrder == "madaily" ? "madaily_desc" : "madaily";
-            ViewBag.TenDaiLySortParm = sortOrder == "tendaily" ? "tendaily_desc" : "tendaily";
-            ViewBag.DiaChiSortParm = sortOrder == "diachi" ? "diachi_desc" : "diachi";
+            
             var daily = from s in db.DaiLies where s.Flag == true select s;
             daily = daily.OrderByDescending(s => s.MaDaiLy);
-
-            if (searchString != null)
-                page = 1;
-            else searchString = currentFilter;
-            ViewBag.CurrentFilter = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -43,32 +35,7 @@ namespace QLVS.Controllers
                     TempData["notice"] = "No result";
                 }
             }
-            switch (sortOrder)
-            {
-                case "madaily":
-                    daily = daily.OrderBy(s => s.MaDaiLy);
-                    break;
-                case "madaily_desc":
-                    daily = daily.OrderByDescending(s => s.MaDaiLy);
-                    break;
-                case "tendaily":
-                    daily = daily.OrderBy(s => s.TenDaiLy);
-                    break;
-                case "tendaily_desc":
-                    daily = daily.OrderByDescending(s => s.TenDaiLy);
-                    break;
-                case "diachi":
-                    daily = daily.OrderBy(s => s.DiaChi);
-                    break;
-                case "diachi_desc":
-                    daily = daily.OrderByDescending(s => s.DiaChi);
-                    break;
-
-            }
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(daily.ToPagedList(pageNumber, pageSize));
+            return View(db.DaiLies.ToList());
         }
 
 

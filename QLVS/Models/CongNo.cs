@@ -1,4 +1,4 @@
-namespace QLVS.Models
+﻿namespace QLVS.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,11 +13,14 @@ namespace QLVS.Models
         public string ID { get; set; }
 
         [StringLength(20)]
+        [Display(Name = "Mã Đại lý")]
         public string MaDaiLy { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày")]
         public DateTime? Ngay { get; set; }
 
+        [Display(Name = "Số tiền nợ")]
         public decimal? SoTienNo { get; set; }
 
         public bool? Flag { get; set; }

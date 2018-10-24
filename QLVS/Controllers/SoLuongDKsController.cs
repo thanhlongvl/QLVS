@@ -16,20 +16,10 @@ namespace QLVS.Controllers
         private QLVSContext db = new QLVSContext();
 
         // GET: SoLuongDKs
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string searchString)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.IDSortParm = sortOrder == "ID" ? "ID_desc" : "ID";
-            ViewBag.TenDaiLySortParm = sortOrder == "tendaily" ? "tendaily_desc" : "madaily";
-            ViewBag.NgayDKSortParm = sortOrder == "ngaydk" ? "ngaydk_desc" : "ngaydk";
-            ViewBag.SldkSortParm = sortOrder == "sldk" ? "sldk_desc" : "sldk";
             var sldk = from s in db.SoLuongDKs where s.Flag == true select s;
             sldk = sldk.OrderByDescending(s => s.ID);
-
-            if (searchString != null)
-                page = 1;
-            else searchString = currentFilter;
-            ViewBag.CurrentFilter = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -44,38 +34,7 @@ namespace QLVS.Controllers
                     TempData["notice"] = "No result";
                 }
             }
-            switch (sortOrder)
-            {
-                case "ID":
-                    sldk = sldk.OrderBy(s => s.ID);
-                    break;
-                case "ID_desc":
-                    sldk = sldk.OrderByDescending(s => s.ID);
-                    break;
-                case "tendaily":
-                    sldk = sldk.OrderBy(s => s.MaDaiLy);
-                    break;
-                case "tendaily_desc":
-                    sldk = sldk.OrderByDescending(s => s.MaDaiLy);
-                    break;
-                case "ngaydk":
-                    sldk = sldk.OrderBy(s => s.NgayDK);
-                    break;
-                case "ngaydk_desc":
-                    sldk = sldk.OrderByDescending(s => s.NgayDK);
-                    break;
-                case "sldk":
-                    sldk = sldk.OrderBy(s => s.SoLuongDK1);
-                    break;
-                case "sldk_desc":
-                    sldk = sldk.OrderByDescending(s => s.SoLuongDK1);
-                    break;
-
-            }
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(sldk.ToPagedList(pageNumber, pageSize));
+            return View(db.SoLuongDKs.ToList());
         }
 
         // GET: SoLuongDKs/Details/5
